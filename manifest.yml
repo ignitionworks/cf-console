@@ -1,0 +1,6 @@
+---
+applications:
+- name: cf-console
+  command: yarn start
+  env:
+    API_HOST: http://cf-console.apps.internal:8080
