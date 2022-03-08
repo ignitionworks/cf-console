@@ -1,0 +1,24 @@
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: node
+    tag: 16.14.0-alpine3.15
+
+inputs:
+- name: repo
+
+outputs:
+- name: built-repo
+
+run:
+  path: sh
+  args:
+  - -euc
+  - |-
+    yarn install
+    yarn lint
+    yarn build
+    cp -a ./. ../built-repo/
+  dir: repo

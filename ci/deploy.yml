@@ -1,0 +1,42 @@
+---
+resource_types:
+
+- name: cf
+  type: registry-image
+  source:
+    repository: concourse/cf-resource
+    tag: 1.1.4
+
+resources:
+- name: repo
+  type: git
+  icon: github
+  source:
+    uri: git@github.com:ignitionworks/cf-console.git
+    branch: main
+    private_key: ((cf_console_repo_key.private_key))
+
+- name: cf-console
+  type: cf
+  source:
+    api: https://api.cloud.ignition.works
+    username: ((cf_user.username))
+    password: ((cf_user.password))
+    organization: iw
+    space: cf-console-prod
+    skip_cert_check: false
+    current_app_name: cf-console
+
+jobs:
+- name: test
+  plan:
+  - get: repo
+    trigger: true
+
+  - task: build
+    file: repo/ci/tasks/yarn.yml
+
+  - put: cf-console
+    params:
+      manifest: built-repo/manifest.yml
+      path: built-repo
