@@ -7,7 +7,7 @@ const results = async ({ token, searchTerm }) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': `bearer ${token}`
     }
   })
 

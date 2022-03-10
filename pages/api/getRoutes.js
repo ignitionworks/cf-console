@@ -21,7 +21,7 @@ const getRoutes =  async (req, res) => {
   const session = await getSession({ req })
   const type = req.query.type
   const route = apiRoutes[type] || 'routes'
-  const data = await results({ token: session.accessToken, route })
+  const data = await resuls({ token: session.accessToken, route })
   console.log('data', data)
   res.status(200).json({ data })
 }
