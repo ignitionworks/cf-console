@@ -11,9 +11,9 @@ import {
 import { useState } from 'react'
 import Orgs from './orgs'
 
-const server = process.env.NEXT_PUBLIC_API_HOST
-
 export default function Search() {
+  const server = process.env.NEXT_PUBLIC_API_HOST
+
   const [search, setSearch] = useState('')
   const [results, setResults] = useState([])
 
